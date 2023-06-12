@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+  backend:
+    build:
+      context: .
+      target: development
+    depends_on:
+      - db
+    environment:
+      - TESTDB_HOST=testdb
+      - DB_HOST=db
+      - DB_PORT=27017
+      - DB_NAME=corporate
+      - INIT=true
+    ports:
+      - 3000:3000
+    volumes:
+      - testOutput:/app/testOutput
+      - output:/app/output
+  db:
+    image: mongo
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping')"]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - db-data:/data/db
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+  testdb:
+    image: mongo
+    tmpfs:
+      - /data/db
+    restart: always
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.runCommand('ping')"]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    expose:
+      - 27017
+volumes:
+  db-data:
+  output:
+  testOutput:

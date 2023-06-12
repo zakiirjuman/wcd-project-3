@@ -1,6 +1,5 @@
 import express from "express";
-
-import createConnection from "./createConnection.js";
+import { MongoClient } from "mongodb";
 
 const app = express();
 app.use(express.json());
@@ -51,3 +50,20 @@ const { DB_HOST, DB_PORT, DB_NAME } = process.env;
     console.log("No database connection");
   }
 })();
+
+async function createConnection(host, port, dbName) {
+  const url = `mongodb://${host}:${port}`; // Replace with your MongoDB connection string
+  //const dbName = "my-database"; // Replace with your database name
+
+  try {
+    const client = await MongoClient.connect(url);
+    const db = client.db(dbName);
+
+    console.log("Connected to MongoDB successfully");
+    return { db, client };
+  } catch (error) {
+    console.log("Failed to connect to MongoDB");
+    console.log(error);
+    return null;
+  }
+}

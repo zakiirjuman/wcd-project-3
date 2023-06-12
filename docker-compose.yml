@@ -10,13 +10,14 @@ services:
       - TESTDB_HOST=testdb
       - DB_HOST=db
       - DB_PORT=27017
-      - DB_NAME=corporate
+      - DB_NAME=WCD_project2
       - INIT=true
     ports:
       - 3000:3000
     volumes:
       - testOutput:/app/testOutput
       - output:/app/output
+      - .:/app
   db:
     image: mongo
     restart: always

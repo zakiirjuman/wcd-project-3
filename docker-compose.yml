@@ -19,15 +19,18 @@ services:
       - output:/app/output
       - .:/app
   db:
-    image: mongo
+    build:
+      context: .
+      dockerfile: ./Dockerfile.db
+    #image: mongo
     restart: always
     healthcheck:
       test: ["CMD", "mongo", "--eval", "db.runCommand('ping')"]
       interval: 3s
       retries: 5
       start_period: 30s
-    volumes:
-      - db-data:/data/db
+    #volumes:
+    #  - db-data:/data/db
     expose:
       - 27017
     ports:
@@ -45,6 +48,6 @@ services:
     expose:
       - 27017
 volumes:
-  db-data:
+  #db-data:
   output:
   testOutput:

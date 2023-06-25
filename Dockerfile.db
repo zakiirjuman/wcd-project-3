@@ -1,0 +1,17 @@
+# Base image
+FROM mongo
+
+# Set working directory
+WORKDIR /app
+
+# Add mongo shell scripts and data
+COPY import.sh ./
+COPY nhl-stats-2022.csv ./
+COPY entrypoint.sh ./
+
+# Make our shell scripts executable
+RUN chmod +x import.sh entrypoint.sh
+
+# Run our script
+CMD ["./entrypoint.sh"]
+#CMD ["mongod"]

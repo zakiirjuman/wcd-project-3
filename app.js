@@ -13,10 +13,10 @@ const { DB_HOST, DB_PORT, DB_NAME } = process.env;
     const players = db.collection("nhl_stats_2022");
 
     //error if there are no documents in the collection
-    if ((await players.countDocuments({})) === 0) {
-      console.log("No documents in players collection   ...exiting");
-      process.exit(1);
-    }
+    //if ((await players.countDocuments({})) === 0) {
+    //  console.log("No documents in players collection   ...exiting");
+    //  process.exit(1);
+    //}
 
     //return all documents in the nhl_stats_2022 collection
     app.get("/players", async (req, res) => {

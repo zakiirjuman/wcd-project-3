@@ -17,7 +17,6 @@ services:
     volumes:
       - testOutput:/app/testOutput
       - output:/app/output
-      - .:/app
   db:
     build:
       context: .

@@ -88,7 +88,7 @@ For app image:
 https://hub.docker.com/r/zakiirjuman/project-3-app
 
 ## Diagram
-![AWS Diagram of Projects 3 and 4](./project34.jpg)
+![AWS Diagram of Projects 3 and 4](./Project34.jpg)
 
 ## Authors
 
